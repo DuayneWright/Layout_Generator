@@ -1,9 +1,0 @@
-Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
-Orientation,,,,,,,,,,,,,
-Neighborhood,ssa,,,,,,,,,,,,
-Building,s,,,,,,,,,,,,
-Room Name,asasa,,,,,,,,,,,,
-Date,2025 March 12,,,,,,,,,,,,
-X Axis,,,,,,,,,,,0.0,1.0,24.0
-Y Axis,,,,,,,,,,,0.0,1.0,24.0
-Furniture,sa,1.0,1.0,2.0,12.0,0.0,2.0,2.0,Rectangle,,,,
