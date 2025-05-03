@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Ullamco ratione Nam ,,,,,,,,,,,,
+Building,Eos reprehenderit n,,,,,,,,,,,,
+Room Name,Aurelia Donaldson,,,,,,,,,,,,
+Date,2010 January 21,,,,,,,,,,,,
+Layout Name,Teegan Keith,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,29.0,36.0
+Y Axis,,,,,,,,,,,0.0,5.75,36.0
+Room Navigation, ,29.00,2.75,0.0,12.0,0.0,1.0,15.0,,,,,

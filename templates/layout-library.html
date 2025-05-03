@@ -1,0 +1,1110 @@
+{% extends 'base.html' %}
+
+{% block title %} Layout Library {% endblock %}
+
+{% block styling %}
+<style>
+    h1 {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        position: relative;
+        margin-top: 20px;
+        min-height: 600px;
+    }
+
+    .image-container div {
+        box-sizing: border-box;
+        width: calc(33.33% - 20px);
+        margin: 10px;
+        position: relative;
+        cursor: pointer;
+        border: 2px solid black;
+        border-radius: 5px;
+    }
+
+    .alt-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        transform: translateY(-50%);
+    }
+
+    .image-container div:hover .alt-overlay {
+        opacity: 1;
+    }
+
+    .image-container.hidden {
+        display: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    html,
+    body {
+        overflow-y: auto;
+    }
+
+    .card-img-top {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        position: relative;
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        width: 80%;
+        max-width: 400px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #888;
+    }
+
+    .modal-buttons {
+        margin-top: 20px;
+    }
+
+    .confirm-button {
+        background-color: #e74c3c;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-right: 10px;
+    }
+
+    .cancel-button {
+        background-color: #bbb;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .confirm-button:hover {
+        background-color: #c0392b;
+    }
+
+    .cancel-button:hover {
+        background-color: #999;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border-color: #c3e6cb;
+        border-left: 5px solid #28a745;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        position: relative;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .alert-success ul {
+        margin-bottom: 0;
+        padding-left: 20px;
+    }
+
+    .alert-success li {
+        margin-bottom: 5px;
+    }
+
+    .alert-success .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #155724;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .alert-success .close:hover {
+        color: #0b3d26;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border-color: #f5c6cb;
+        border-left: 5px solid #dc3545;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        position: relative;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .alert-danger ul {
+        margin-bottom: 0;
+        padding-left: 20px;
+    }
+
+    .alert-danger li {
+        margin-bottom: 5px;
+    }
+
+    .alert-danger .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        color: #721c24;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .alert-danger .close:hover {
+        color: #4c1218;
+    }
+
+    .dropdown-item {
+        cursor: pointer;
+    }
+
+    .dropdown {
+        position: static;
+    }
+
+    .history-item {
+        border-bottom: 1px solid #eee;
+        padding: 15px 0;
+    }
+
+    .history-item:last-child {
+        border-bottom: none;
+    }
+
+    .history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+
+    .history-header h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .timestamp {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .history-user {
+        color: #666;
+        font-size: 14px;
+    }
+
+    .error-message {
+        color: #dc3545;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .history-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+
+    .timestamp, .history-user {
+        color: #666;
+        font-size: 14px;
+    }
+</style>
+
+<!-- Search functionality -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Function to filter layouts based on search input
+        function filterLayouts(searchTerm) {
+            const layoutCards = document.querySelectorAll('.card');
+
+            layoutCards.forEach(function (card) {
+                const layoutName = card.querySelector('.card-title').textContent.toLowerCase();
+                const isVisible = layoutName.includes(searchTerm.toLowerCase());
+
+                card.parentNode.style.display = isVisible ? 'block' : 'none';
+            });
+        }
+
+        // Event listener for the search button
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', function () {
+            const searchTerm = document.getElementById('searchInput').value;
+            filterLayouts(searchTerm);
+        });
+
+        // Event listener for the filter dropdown
+        const filterDropdown = document.getElementById('filter');
+        filterDropdown.addEventListener('change', function () {
+            const filterValue = this.value;
+            // Redirect to URL with filter value
+            window.location.href = `?filter=${filterValue}`;
+        });
+
+        // Initial filtering to handle any default state
+        const filterValue = filterDropdown.value;
+        if (filterValue) {
+            // Filter layouts based on initial filter value
+            const searchTerm = document.getElementById('searchInput').value;
+            filterLayouts(searchTerm);
+        }
+    });
+
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+<header>
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="dropdown">
+            <button class="btn btn-success dropdown-toggle" type="button" id="newButton" data-bs-toggle="dropdown"
+                style="background-color: #1a9cdd;">
+                New
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="newButton">
+                <li><a class="dropdown-item" href="{% url 'measure' %}">Layout</a></li>
+                <li><a class="dropdown-item" onclick="openFolderModal()">Folder</a></li>
+            </ul>
+        </div>
+        <h1 class="display-5 fw-bold mx-auto" style="margin-top:0rem;">Layout Library</h1>
+
+        <!-- Temporary fix to center the title on the page -->
+        <div class="dropdown" style="visibility: hidden;">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dummyButton" data-bs-toggle="dropdown"
+                style="background-color: #1a9cdd;">
+                New
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="container mt-3 w-75">
+    <!-- Directory Navigation -->
+    <nav aria-label="breadcrumb">
+        <span class="me-2">Path:</span>
+        <ol class="breadcrumb d-inline-flex">
+            <li class="breadcrumb-item"><a href="{% url 'layout-library' %}">layout-library</a></li>
+            {% for dir, path in breadcrumb_paths %}
+                <li class="breadcrumb-item">
+                    <a href="{% url 'layout-library-folder' path %}">{{ dir }}</a>
+                </li>
+            {% endfor %}
+        </ol>
+    </nav>
+
+    <!-- Search + Filtering -->
+    <form method="get" class="row pb-2">
+        <div class="col-md-3 mb-2">
+            <select name="filter" id="filter" class="form-select" onchange="this.form.submit()">
+                <option value="">Choose a filter:</option>
+                <option value="alphabeticalAZ" {% if filter_value == 'alphabeticalAZ' %}selected{% endif %}>Alphabetical A-Z</option>
+                <option value="alphabeticalZA" {% if filter_value == 'alphabeticalZA' %}selected{% endif %}>Alphabetical Z-A</option>
+                <option value="newest" {% if filter_value == 'newest' %}selected{% endif %}>Newest</option>
+                <option value="oldest" {% if filter_value == 'oldest' %}selected{% endif %}>Oldest</option>
+            </select>
+        </div>
+        <div class="col-md-7 mb-2 position-relative">
+            <input type="text" id="searchInput" name="search" class="form-control"
+                placeholder="Search by layout name"
+                value="{{ request.GET.search }}">
+                <div id="searchResults" class="list-group position-absolute w-100" style="z-index: 1000;"></div>
+        </div>
+        <div class="col-md-2 mb-2">
+            <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+    </form>
+
+    <!-- Display messages (success and error) -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+            <div class="alert alert-success" role="alert">
+                <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                    <li>{{ message }}</li>
+                </ul>
+            </div>
+            {% elif message.tags == 'error' %}
+            <div class="alert alert-danger" role="alert">
+                <span class="close" onclick="this.parentElement.style.display='none';">&times;</span>
+                <ul>
+                    <li>{{ message }}</li>
+                </ul>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <!-- Display user's folders -->
+    {% if folders %}
+    <div class="row" id="folderRow">
+        <h3><u>Folders</u></h3>
+        {% for folder in folders %}
+            {% if folder.parent_directory == current_directory %}
+            <div class="col-md-2">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div class="text-truncate">
+                        <i class="bi bi-folder-fill" style="color: #1a9cdd;"></i>
+                        <a class="card-title" href="{% url 'layout-library-folder' folder.full_path %}" style="text-decoration: none;">
+                                {{folder.folder_name}}
+                        </a>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i id="folder_menu" class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" id="rename_folder" href="#"
+                                    onclick="showRenameFolderModal('{{ folder.id }}', '{{ folder.folder_name }}')">
+                                    <i class="bi bi-pencil-square me-2"></i>Rename
+                                </a>
+                            </li>    
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>     
+                            <li>
+                                <form id="delete-folder-form-{{ folder.id }}" 
+                                    action="{% url 'delete_folder' folder.id %}" 
+                                    method="post" 
+                                    class="d-inline">
+                                    {% csrf_token %}
+                                    <button id="delete_folder"
+                                            type="button" 
+                                            class="dropdown-item text-danger" 
+                                            onclick="confirmFolderDelete('{{ folder.id }}', '{{ folder.folder_name }}')">
+                                        <i class="bi bi-trash me-2"></i>Delete
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:6 and not forloop.last %}
+                <div class="w-100"></div>
+            {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Rename Folder Modal -->
+    <div id="renameFolderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeRenameFolderModal()">&times;</span>
+            <h2>Rename Folder</h2>
+            <p>Enter a new name for this folder:</p>
+            <form id="renameFolderForm" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="new_folder_name" name="new_folder_name" class="form-control" required>
+                </div>
+                <div class="modal-buttons">
+                    <button id="rename_folder_confirm" type="submit" class="confirm-button">Rename</button>
+                    <button id="rename_folder_cancel" type="button" onclick="closeRenameFolderModal()" class="cancel-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Folder Modal -->
+    <div id="confirmFolderModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeFolderDeleteModal()">&times;</span>
+            <h2>Delete Folder</h2>
+            <p>Are you sure you want to delete the folder "<span id="folderNameToDelete"></span>"? This will also delete all layouts inside this folder. This action cannot be undone!</p>
+            <div class="modal-buttons">
+                <button id="delete_folder_confirm" onclick="deleteFolder()" class="confirm-button">Delete</button>
+                <button id="delete_folder_cancel" onclick="closeFolderDeleteModal()" class="cancel-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+        
+        <br>
+
+    {% if layouts %}
+    <h3><u style="margin-top: 10px">Files</u></h3>
+    <div class="row" id="layoutRow">
+        {% for layout in layouts %}
+        <div class="col-md-4">
+            <div class="card mb-3" style="height: 300px; overflow-y: hidden;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="text-truncate">
+                            <a href="{% url 'export-layout' layout.id %}" class="text-decoration-none text-dark">
+                                <h5 class="card-title text-truncate mb-0">
+                                    <i class="bi bi-file-earmark-fill" style="color: #1a9cdd;"></i>
+                                    {{ layout.file_name }}
+                                </h5>
+                            </a>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i id="layout_menu" class="bi bi-three-dots-vertical"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" id="edit_drop" href="{% url 'edit-layout' layout.id %}">
+                                        <i class="bi bi-pencil me-2"></i>Edit
+                                    </a></li>
+                                <li><a class="dropdown-item" id="download_drop"
+                                        onclick="window.location.href='{% url 'download-zip' layout.id %}'" href="#">
+                                        <i class="bi bi-download me-2"></i>Download
+                                    </a></li>
+                                <li><a class="dropdown-item" id="rename_drop" href="#"
+                                        onclick="showRenameModal('{{ layout.id }}', '{{ layout.file_name }}')">
+                                        <i class="bi bi-pencil-square me-2"></i>Rename
+                                    </a></li>
+                                <li><a class="dropdown-item" id="move_drop" href="#"
+                                        onclick="showMoveModal('{{ layout.id }}', '{{ layout.file_name }}', '{{ current_directory }}')">
+                                        <i class="bi bi-folder-symlink me-2"></i>Move
+                                    </a></li>
+                                <li><a class="dropdown-item" id="version_drop" href="#" data-layout-id="{{ layout.id }}">
+                                    <i class="bi bi-clock-history me-2"></i>History
+                                </a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <form id="delete-form-{{ layout.id }}"
+                                        action="{% url 'delete_layout_test' layout.id %}" method="post"
+                                        class="d-inline">
+                                        {% csrf_token %}
+                                        <button type="button" class="dropdown-item text-danger" id="delete_drop"
+                                            onclick="confirmLayoutDelete('{{ layout.id }}')">
+                                            <i class="bi bi-trash me-2"></i>Delete
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'export-layout' layout.id %}" class="mt-auto">
+                    <img src="{% url 'serve-image' layout.image %}" class="card-img-bottom"
+                        style="object-fit: contain; height: 250px;" alt="{{ layout.file_name }}">
+                </a>
+            </div>
+        </div>
+        {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        <div class="w-100"></div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+<!-- Delete All Layouts Button and Form -->
+<div class="row justify-content-end">
+    <div class="col-auto pb-3">
+        {% if layouts %}
+        <form id="deleteForm" action="{% url 'delete_all_layout_test' %}" method="post">
+            {% csrf_token %}
+            <button id="delete_all_layouts" type="button" class="btn btn-md btn-danger" onclick="showDeleteAllModal()">Delete All
+                Layouts</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Delete Single Layout Modal -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>Delete Layout</h2>
+        <p>Are you sure you want to delete this layout? This action cannot be undone!</p>
+        <div class="modal-buttons">
+            <button id="delete_layout_confirm" onclick="deleteLayout()" class="confirm-button">Delete</button>
+            <button id="delete_layout_cancel" onclick="closeModal()" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete All Layouts Modal -->
+<div id="deleteAllLayoutsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <h2>Delete All Layouts</h2>
+        <p>Are you sure you want to delete all layouts? This action cannot be undone!</p>
+        <div class="modal-buttons">
+            <button id="delete_all_layouts_confirm" onclick="deleteAll()" class="confirm-button">Delete All</button>
+            <button id="delete_all_layouts_cancel" onclick="closeModal()" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Create New Folder Modal -->
+<div id="folderModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeFolderModal()">&times;</span>
+        <h2>Create Folder</h2>
+        <p>Enter the folder name:</p>
+        <form class="form-group" method="post" onsubmit="createFolder(event)">
+            {% csrf_token %}
+            <input type="text" id="folderNameInput" class="form-control" placeholder="Folder name">
+            <input type="hidden" id="currentDirectory" value="{{ current_directory }}">
+        </form>
+        <div class="modal-buttons">
+            <button id="create_folder_confirm" onclick="createFolder(event)" class="confirm-button">Create</button>
+            <button id="create_folder_cancel" onclick="closeFolderModal()" class="cancel-button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Move Layout Modal -->
+<div id="moveModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeMoveModal()">&times;</span>
+        <h2>Move Layout</h2>
+        <p>Choose a folder to move the layout to:</p>
+        <form id="moveForm" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="layoutCurrentDirectory" name="currentDirectory">
+            <select id="folderSelect" name="newDirectory" class="form-select">
+                <option value="">Root (layout-library)</option>
+                <!-- Folder options will be dynamically populated here -->
+            </select>
+            <div class="modal-buttons">
+                <button id="move_layout_confirm" type="submit" class="confirm-button">Move</button>
+                <button id="move_layout_cancel" type="button" onclick="closeMoveModal()" class="cancel-button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Rename Layout Modal -->
+<div id="renameModal" class="modal">
+    <div class="modal-content">
+        <span class="close-button" onclick="closeRenameModal()">&times;</span>
+        <h2>Rename Layout</h2>
+        <p>Enter a new name for this layout:</p>
+        <form id="renameForm" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input type="text" id="new_name" name="new_name" class="form-control" required>
+            </div>
+            <div class="modal-buttons">
+                <button id="rename_layout_confirm" type="submit" class="confirm-button">Rename</button>
+                <button id="rename_layout_cancel" type="button" onclick="closeRenameModal()" class="cancel-button">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Version History Modal -->
+<div id="historyModal" class="modal">
+    <div class="modal-content" style="width: 35%; max-width: 1000px;">
+        <span class="close-button" onclick="closeHistoryModal()">&times;</span>
+        <h2>Version History</h2>
+        <div id="historyContent">
+            <!-- History items will be populated here -->
+        </div>
+        <div class="modal-buttons">
+            <button id="close_history_button" onclick="closeHistoryModal()" class="cancel-button">Close</button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- TODO: this section does not effectively move files and update their folder location. Error
+ Could be here or in the views.py portion. "Not Found: /move-layout/null/" appears -->
+
+{% block scripting %}
+<script>
+    let layoutToDelete;
+    let layoutToRename;
+    let layoutToMove;
+    let currentLayoutName;
+    let currentDirectory;
+    let folderHierarchy = {};
+
+    // Parse folder data into hierarchical structure
+    function buildFolderHierarchy(folders) {
+        const hierarchy = {
+            children: {}
+        };
+        
+        // Sort folders by path length to ensure parents are processed before children
+        folders.sort((a, b) => {
+            const aDepth = a.full_path.split('/').length;
+            const bDepth = b.full_path.split('/').length;
+            return aDepth - bDepth;
+        });
+        
+        // Add each folder to the hierarchy
+        folders.forEach(folder => {
+            const parts = folder.full_path.split('/');
+            let current = hierarchy;
+            
+            // Navigate through the parts to build the path
+            for (let i = 0; i < parts.length; i++) {
+                const part = parts[i];
+                if (!current.children[part]) {
+                    current.children[part] = {
+                        name: part,
+                        path: parts.slice(0, i + 1).join('/'),
+                        children: {}
+                    };
+                }
+                current = current.children[part];
+            }
+        });
+        
+        return hierarchy;
+    }
+    
+    // Populate the select dropdown with hierarchical options
+    function populateFolderSelect(hierarchy, select, prefix = '', level = 0) {
+        const indent = '&nbsp;'.repeat(level * 4);
+        
+        // Sort child folders alphabetically
+        const sortedChildren = Object.values(hierarchy.children).sort((a, b) => 
+            a.name.localeCompare(b.name)
+        );
+        
+        // Add each child as an option
+        sortedChildren.forEach(child => {
+            const option = document.createElement('option');
+            option.value = child.path;
+            option.innerHTML = `${indent}${level > 0 ? '└─ ' : ''}${child.name}`;
+            select.appendChild(option);
+            
+            // Recursively add children
+            populateFolderSelect(child, select, prefix + '&nbsp;&nbsp;', level + 1);
+        });
+    }
+
+    // Show move modal with hierarchical folder structure
+    function showMoveModal(layoutId, layoutName, currentDir) {
+        layoutToMove = layoutId;
+        currentDirectory = currentDir;
+        document.getElementById("moveForm").action = `/move-layout/${layoutId}/`;
+        document.getElementById("layoutCurrentDirectory").value = currentDir;
+        
+        // Get all folders from the page
+        const folderData = [];
+        {% for folder in all_folders %}
+            folderData.push({
+                id: '{{ folder.id }}',
+                folder_name: '{{ folder.folder_name }}',
+                full_path: '{{ folder.full_path }}',
+                parent_directory: '{{ folder.parent_directory }}'
+            });
+        {% endfor %}
+        
+        // Build the folder hierarchy
+        const hierarchy = buildFolderHierarchy(folderData);
+        
+        // Get and clear the select element
+        const select = document.getElementById('folderSelect');
+        select.innerHTML = '';
+        
+        // Add root option
+        const rootOption = document.createElement('option');
+        rootOption.value = '';
+        rootOption.textContent = 'Root (layout-library)';
+        select.appendChild(rootOption);
+        
+        // Populate the select with hierarchical options
+        populateFolderSelect(hierarchy, select);
+        
+        // Disable the current directory option
+        Array.from(select.options).forEach(option => {
+            if (option.value === currentDir) {
+                option.disabled = true;
+                option.innerHTML += ' (current location)';
+            }
+        });
+        
+        // Show the modal
+        document.getElementById("moveModal").style.display = "block";
+    }
+
+    function showDeleteAllModal() {
+        document.getElementById("deleteAllLayoutsModal").style.display = "block";
+    }
+
+    function confirmLayoutDelete(layoutId) {
+        layoutToDelete = layoutId;
+        document.getElementById("confirmationModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+    }
+
+    function deleteLayout() {
+        document.getElementById(`delete-form-${layoutToDelete}`).submit();
+        closeModal();
+    }
+
+    function deleteAll() {
+        document.getElementById("deleteForm").submit();
+        closeModal();
+    }
+
+    function showRenameModal(layoutId, currentName) {
+        layoutToRename = layoutId;
+        currentLayoutName = currentName;
+        document.getElementById("renameForm").action = `/rename-layout/${layoutId}/`;
+        document.getElementById("new_name").value = currentName;
+        document.getElementById("renameModal").style.display = "block";
+    }
+
+    function closeRenameModal() {
+        document.getElementById("renameModal").style.display = "none";
+    }
+
+    function closeMoveModal() {
+        document.getElementById("moveModal").style.display = "none";
+    }
+
+    document.getElementById("renameForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const newName = document.getElementById("new_name").value.trim();
+        if (newName === currentLayoutName) {
+            alert("The new name must be different from the current name.");
+            return;
+        }
+        const existingNames = [...document.querySelectorAll('.card-title')]
+            .map(card => card.textContent.trim().toLowerCase())
+            .filter(name => name !== currentLayoutName.toLowerCase());
+        if (existingNames.includes(newName.toLowerCase())) {
+            alert("This layout name already exists. Please choose a different name.");
+            return;
+        }
+        this.submit();
+    });
+
+    // Update the form submission handler to validate the selected directory
+    document.getElementById("moveForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const newDirectory = document.getElementById('folderSelect').value;
+        
+        // Prevent moving to the current directory
+        if (newDirectory === currentDirectory) {
+            alert("The layout is already in this folder.");
+            return;
+        }
+        
+        // Submit the form
+        this.submit();
+    });
+
+    window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) closeModal();
+    }
+</script>
+
+<script>
+    function showHistoryModal(layoutId) {
+        // Clear previous content
+        document.getElementById('historyContent').innerHTML = '';
+        
+        // Show loading state
+        document.getElementById('historyContent').innerHTML = '<div class="text-center">Loading...</div>';
+        
+        // Show the modal
+        document.getElementById('historyModal').style.display = "block";
+        
+        // Fetch history data
+        fetch(`/history/${layoutId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const historyHtml = data.history.length ? data.history.map(entry => `
+                        <div class="history-item">
+                            <div class="history-header">
+                                <h3>
+                                    ${entry.action === 'RENAME' ? 
+                                        `Renamed from "${entry.old_value}" to "${entry.new_value}"` :
+                                        entry.action === 'MOVE' ? 
+                                        `Moved from "${entry.old_value}" to "${entry.new_value}"` :
+                                        entry.action === 'CONVERT' ? 
+                                        `${entry.new_value}` :
+                                        entry.action === 'EDIT' ?
+                                        'Layout edited with the following changes:' :
+                                        'Layout updated'
+                                    }
+                                </h3>
+                                <div class="history-meta">
+                                    <span class="timestamp">${entry.timestamp}</span>
+                                    <span class="history-user">By ${entry.username}</span>
+                                </div>
+                            </div>
+                            ${entry.action === 'EDIT' ? 
+                                `<ul>${entry.new_value.split('\n').map(change => `<li>${change}</li>`).join('')}</ul>` : ''}
+                        </div>
+                    `).join('') : '<p class="text-center">No history available for this layout.</p>';
+                    
+                    document.getElementById('historyContent').innerHTML = historyHtml;
+                } else {
+                    document.getElementById('historyContent').innerHTML = `
+                        <div class="error-message">
+                            Error loading history: ${data.error}
+                        </div>
+                    `;
+                }
+            })
+            .catch(error => {
+                document.getElementById('historyContent').innerHTML = `
+                    <div class="error-message">
+                        Error loading history. Please try again later.
+                    </div>
+                `;
+            });
+    }
+
+    function closeHistoryModal() {
+        document.getElementById("historyModal").style.display = "none";
+    }
+
+    // Update the version history link click handler
+    document.querySelectorAll('#version_drop').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const layoutId = this.closest('form') ? 
+                this.closest('form').id.replace('delete-form-', '') : 
+                this.getAttribute('data-layout-id');
+            showHistoryModal(layoutId);
+        });
+    });
+
+    // Add event listener to close modal when clicking outside
+    window.addEventListener('click', function(event) {
+        const modal = document.getElementById('historyModal');
+        if (event.target === modal) {
+            closeHistoryModal();
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+        const modal = document.getElementById("deleteAllLayoutsModal");
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+            searchResults.innerHTML = '';
+
+            if (searchTerm) {
+                const layoutCards = document.querySelectorAll('.card');
+                layoutCards.forEach(function (card) {
+                    const layoutName = card.querySelector('.card-title').textContent.toLowerCase();
+                    if (layoutName.includes(searchTerm)) {
+                        const resultItem = document.createElement('a');
+                        resultItem.className = 'list-group-item list-group-item-action';
+                        resultItem.textContent = card.querySelector('.card-title').textContent;
+                        resultItem.addEventListener('click', function () {
+                            searchResults.innerHTML = '';
+                            filterLayouts(searchTerm);
+                        });
+                        searchResults.appendChild(resultItem);
+                    }
+                });
+            }
+        });
+
+        function filterLayouts(searchTerm) {
+            const layoutCards = document.querySelectorAll('.card');
+            layoutCards.forEach(function (card) {
+                const layoutName = card.querySelector('.card-title').textContent.toLowerCase();
+                const isVisible = layoutName.includes(searchTerm.toLowerCase());
+                card.parentNode.style.display = isVisible ? 'block' : 'none';
+            });
+        }
+    });
+</script>
+
+<script>
+    // Open Folder Modal
+    function openFolderModal() {
+        document.getElementById("folderModal").style.display = "block";
+    }
+
+    // Close Folder Modal
+    function closeFolderModal() {
+        document.getElementById("folderModal").style.display = "none";
+    }
+
+    // Create Folder
+    function createFolder(event) {
+        event.preventDefault();
+        const folderName = document.getElementById("folderNameInput").value.trim();
+        const currentDirectory = document.getElementById("currentDirectory").value;
+
+        if (!folderName) {
+            alert("Please enter a folder name.");
+            return;
+        }
+
+        // Build the full path for the new folder
+        const fullPath = currentDirectory ? `${currentDirectory}/${folderName}` : folderName;
+
+        fetch('/handle-folder-creation/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({
+                folder_name: folderName,
+                parent_directory: currentDirectory
+            })
+        })
+            .then(response => response.json().then(data => ({
+                status: response.status,
+                body: data
+            })))
+            .then(({status, body}) => {
+                if (body.success) {
+                    addFolderIcon(folderName, fullPath);
+                    closeFolderModal();
+                    window.location.reload();
+                } else {
+                    // Show the specific error message from the server
+                    alert(body.error || "Error creating folder");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An unexpected error occurred while creating the folder");
+            });
+    }
+
+    // Function to add the folder icon to the UI
+    function addFolderIcon(folderName, fullPath) {
+        const folderRow = document.getElementById("folderRow");
+        const folderDiv = document.createElement('div');
+        folderDiv.className = 'col-md-2';
+        folderDiv.innerHTML = `
+            <div class="card-body d-flex justify-content-between align-items-center">
+                <div class="text-truncate">
+                    <i class="bi bi-folder-fill" style="color: #198EC8;"></i>
+                    <a class="card-title" href="/layout-library/${encodeURIComponent(fullPath)}/" style="text-decoration: none;">
+                        ${folderName}
+                    </a>
+                </div>
+            </div>
+    `;
+    }
+</script>
+
+<script>
+    let folderToRename;
+    let currentFolderName;
+    let folderIdToDelete = null;
+
+    function showRenameFolderModal(folderId, currentName) {
+        folderToRename = folderId;
+        currentFolderName = currentName;
+        document.getElementById("renameFolderForm").action = `/rename-folder/${folderId}/`;
+        document.getElementById("new_folder_name").value = currentName;
+        document.getElementById("renameFolderModal").style.display = "block";
+    }
+
+    function closeRenameFolderModal() {
+        document.getElementById("renameFolderModal").style.display = "none";
+    }
+
+    document.getElementById("renameFolderForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        const newName = document.getElementById("new_folder_name").value.trim();
+        if (newName === currentFolderName) {
+            alert("The new name must be different from the current name.");
+            return;
+        }
+        const existingNames = [...document.querySelectorAll('.card-title')]
+            .map(card => card.textContent.trim().toLowerCase())
+            .filter(name => name !== currentFolderName.toLowerCase());
+        if (existingNames.includes(newName.toLowerCase())) {
+            alert("This folder name already exists. Please choose a different name.");
+            return;
+        }
+        this.submit();
+    });
+
+    // Add event listener to close modal when clicking outside
+    window.onclick = function(event) {
+        let folderModal = document.getElementById('renameFolderModal');
+        if (event.target == folderModal) {
+            closeRenameFolderModal();
+        }
+    }
+
+    function confirmFolderDelete(folderId, folderName) {
+        folderIdToDelete = folderId;
+        document.getElementById('folderNameToDelete').textContent = folderName;
+        document.getElementById('confirmFolderModal').style.display = 'block';
+    }
+
+    function closeFolderDeleteModal() {
+        document.getElementById('confirmFolderModal').style.display = 'none';
+        folderIdToDelete = null;
+    }
+
+    function deleteFolder() {
+        if (folderIdToDelete) {
+            document.getElementById(`delete-folder-form-${folderIdToDelete}`).submit();
+        }
+    }
+
+    // Add event listener to close modal when clicking outside
+    window.onclick = function(event) {
+        let folderModal = document.getElementById('confirmFolderModal');
+        if (event.target == folderModal) {
+            closeFolderDeleteModal();
+        }
+    }
+</script>
+{% endblock %}

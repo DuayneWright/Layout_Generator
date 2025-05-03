@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Ipsum deserunt debit,,,,,,,,,,,,
+Building,Harum voluptas cupid,,,,,,,,,,,,
+Room Name,Jameson Gamble,,,,,,,,,,,,
+Date,1983 December 19,,,,,,,,,,,,
+Layout Name,Brenna Brady,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-45.5,35.75,24.0
+Y Axis,,,,,,,,,,,0.0,23.0,24.0
+Room Navigation, ,35.75,23.00,0.0,84.0,0.0,1.0,0.0,,,,,

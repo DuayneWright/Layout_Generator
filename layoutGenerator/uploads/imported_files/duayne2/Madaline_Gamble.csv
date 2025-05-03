@@ -1,0 +1,11 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Ut magni voluptate a,,,,,,,,,,,,
+Building,Rem ut deserunt omni,,,,,,,,,,,,
+Room Name,Howard Mckinney,,,,,,,,,,,,
+Date,1996 March 23,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-10.3,4.45,24.0
+Y Axis,,,,,,,,,,,0.0,23.34,24.0
+sensor, ,-10.3,10.84,7.5,7.5,0.0,1.0,0.0,,,,,
+calibration, ,4.45,11.34,7.5,7.5,0.0,1.0,0.0,,,,,
+camera, ,-2.55,23.34,7.5,7.5,0.0,1.0,90.0,,,,,

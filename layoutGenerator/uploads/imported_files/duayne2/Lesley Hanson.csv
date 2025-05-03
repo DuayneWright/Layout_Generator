@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Aut est quisquam eiu,,,,,,,,,,,,
+Building,Dolor sed similique ,,,,,,,,,,,,
+Room Name,Galvin Giles,,,,,,,,,,,,
+Date,1990 August 14,,,,,,,,,,,,
+Layout Name,Lesley Hanson,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,6.0,24.0
+Y Axis,,,,,,,,,,,0.0,29.25,24.0
+Room Navigation, ,6.00,29.25,0.0,12.0,0.0,1.0,-90.0,,Down,,,

@@ -1,0 +1,17 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Eu quaerat eligendi ,,,,,,,,,,,,
+Building,Voluptates rerum et ,,,,,,,,,,,,
+Room Name,Stewart Kent,,,,,,,,,,,,
+Date,2023 September 05,,,,,,,,,,,,
+Layout Name,Isabelle Horton,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-71.38,42.63,24.0
+Y Axis,,,,,,,,,,,0.0,56.38,24.0
+Wall, ,-71.38,56.38,0.0,96.0,0.0,1.0,0.0,,,,,
+Wall, ,25.63,56.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-65.63,40.38,0.0,108.0,0.0,1.0,0.0,,,,,
+Wall, ,42.63,40.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-61.63,29.63,0.0,90.0,0.0,1.0,0.0,,,,,
+Wall, ,30.11,29.63,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-45.63,22.88,0.0,84.0,0.0,1.0,0.0,,,,,
+Wall, ,35.91,22.88,0.0,0.0,0.0,1.0,0.0,,,,,

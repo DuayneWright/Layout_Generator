@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Do voluptas quae des,,,,,,,,,,,,
+Building,Duis nisi qui quas i,,,,,,,,,,,,
+Room Name,Samuel Russo,,,,,,,,,,,,
+Date,1990 January 05,,,,,,,,,,,,
+Layout Name,Ulric Delacruz,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,12.0,24.0
+Y Axis,,,,,,,,,,,0.0,0.25,24.0
+Room Navigation, ,12.00,0.25,0.0,12.0,0.0,1.0,0.0,,left,,,

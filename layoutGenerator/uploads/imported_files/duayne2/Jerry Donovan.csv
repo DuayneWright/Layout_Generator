@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Sit velit cillum q,,,,,,,,,,,,
+Building,Impedit sit eos aut,,,,,,,,,,,,
+Room Name,Evelyn Oconnor,,,,,,,,,,,,
+Date,1982 April 05,,,,,,,,,,,,
+Layout Name,Jerry Donovan,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,6.0,24.0
+Y Axis,,,,,,,,,,,0.0,29.25,24.0
+Room Navigation, ,6.00,29.25,0.0,12.0,0.0,1.0,-90.0,,,,,

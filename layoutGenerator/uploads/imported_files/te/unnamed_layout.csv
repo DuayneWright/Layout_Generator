@@ -1,0 +1,9 @@
+Type,Descriptor,X,Y,width,height,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,s,,,,,,,,,,,,
+Building,s,,,,,,,,,,,,
+Room Name,r,,,,,,,,,,,,
+Date,2025 February 13,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,1.0,24.0
+Y Axis,,,,,,,,,,,0.0,2.0,24.0
+Camera, ,1.0,2.0,0.0,0.0,0.0,3.0,4.0,,,,,

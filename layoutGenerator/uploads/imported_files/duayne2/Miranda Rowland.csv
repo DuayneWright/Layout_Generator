@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Quo deleniti sit fug,,,,,,,,,,,,
+Building,Exercitationem dolor,,,,,,,,,,,,
+Room Name,Azalia Steele,,,,,,,,,,,,
+Date,2009 August 28,,,,,,,,,,,,
+Layout Name,Miranda Rowland,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,18.0,24.0
+Y Axis,,,,,,,,,,,0.0,17.25,24.0
+Room Navigation, ,18.00,17.25,0.0,12.0,0.0,1.0,0.0,,,,,

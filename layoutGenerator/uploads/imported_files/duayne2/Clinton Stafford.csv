@@ -1,0 +1,21 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Sint qui dicta tempo,,,,,,,,,,,,
+Building,Veniam est cumque ,,,,,,,,,,,,
+Room Name,Shellie Trujillo,,,,,,,,,,,,
+Date,2008 December 14,,,,,,,,,,,,
+Layout Name,Clinton Stafford,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-49.0,62.0,36.0
+Y Axis,,,,,,,,,,,-21.0,59.0,36.0
+Wall,rq,-48.50,59.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,rq,46.00,59.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,ed,-49.00,43.25,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,ed,47.25,43.25,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,-45.00,28.50,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,48.00,28.50,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,0.00,0.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,62.00,-16.50,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,61.00,-20.75,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,61.00,-21.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,61.00,-20.75,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,,61.00,-20.75,0.0,0.0,0.0,1.0,0.0,,,,,

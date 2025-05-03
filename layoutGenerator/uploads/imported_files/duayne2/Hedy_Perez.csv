@@ -1,0 +1,11 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Eu velit quia pariat,,,,,,,,,,,,
+Building,Lorem aut quae et pa,,,,,,,,,,,,
+Room Name,Andrew Bright,,,,,,,,,,,,
+Date,2017 April 17,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-10.3,4.45,36.0
+Y Axis,,,,,,,,,,,-5.91,11.34,36.0
+sensor, ,-10.3,10.84,7.5,7.5,0.0,1.0,0.0,,,,,
+calibration, ,4.45,11.34,7.5,7.5,0.0,1.0,0.0,,,,,
+camera, ,-3.8,-5.91,7.5,7.5,0.0,1.0,90.0,,,,,

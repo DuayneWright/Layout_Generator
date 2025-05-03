@@ -1,0 +1,508 @@
+{% extends 'base.html' %}
+
+{% block title %} Edit Layout {% endblock %}
+
+{% block styling %}
+
+<style>
+
+    /* Styling for groups within the form */
+
+    .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .pdf-preview {
+        justify-content: center;
+    }
+
+    /*Drop-shadow effect for buttons--> */
+    .shadow-toggle:focus {
+    box-shadow: 0 0 0 0.25rem rgba(134, 139, 145, 0.25); /* Add focus shadow */
+    }
+
+    .shadow-toggle.active {
+        box-shadow: 0 0 0 0.25rem rgba(134, 139, 145, 0.25); /* Add active shadow */
+        background-color: #f8f9fa;
+    }
+
+    .btn-orientation {
+        padding: 5px;
+        width: 45%;
+        height: 10%;
+        font-size:medium;
+    }
+
+</style>
+<script>
+    // JavaScript for selecting document orientation buttons
+    document.addEventListener("DOMContentLoaded", function() {
+        const landscapeButton = document.getElementById("landscapeButton");
+        const portraitButton = document.getElementById("portraitButton");
+        const orientationField = document.getElementById("id_orientation");
+        console.log("Dom content loaded.")
+
+        function setActiveButton() {
+            console.log("setActiveButton function called.");
+
+            const orientationValue = orientationField.value;
+
+            if (orientationValue === "portrait") {
+                portraitButton.classList.add("active");
+            } else if (orientationValue === "landscape") {
+                landscapeButton.classList.add("active");
+                }
+            console.log("Set active button.")
+        }
+
+        // event listeners to switch active button
+        landscapeButton.addEventListener("click", function() {
+            landscapeButton.classList.add("active");
+            portraitButton.classList.remove("active");
+            orientationField.value = "landscape";
+        })
+
+        portraitButton.addEventListener("click", function() {
+            portraitButton.classList.add("active");
+            landscapeButton.classList.remove("active");
+            orientationField.value = "portrait";
+            });
+        
+        setActiveButton();
+    });
+
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+    <div class="container" {% if layout.style_settings.orientation == "landscape" %}style="width: 85%"{% else %}style="width: 100%;"{% endif %} style="justify-content: space-between; margin-bottom: 10%;">
+
+        <!-- Header -->
+        <div class="col-12 mt-3 mb-4 d-flex flex-row align-items-center justify-content-between" style="border-bottom: 1px solid rgb(166, 161, 161)">
+            <div class="p-2 col-lg-3 col-sm-4">
+                <button type="button" class="btn btn-md btn-secondary" onclick="window.history.back();">
+                    <i class="bi bi-arrow-left"></i> Back
+                </button>
+            </div>
+
+            <div class="p-2 col-lg-6 col-sm-7 text-center">
+                <h1 class="fw-bold align-middle">Edit Layout: {{ layout }}</h1>
+            </div>
+
+            <div class="p-2 col-lg-3 col-sm-4 text-end">
+                <button type="button" class="btn btn-md btn-secondary" onclick="window.location.href='{% url 'measure-layout' layout.id %}'">
+                    Edit Measurements <i class="bi bi-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form id ="layout-form" method="post">
+            {% csrf_token %}
+    
+        <div class="row align-items-start mb-5 d-flex justify-content-between">
+            <div class="col-4 justify-content-center mt-3">
+
+                <!-- Leftmost column containing the color/font controls -->
+               
+                    <center>
+                        <h3 class="fw-bold" style="color: #000">Object Colors</h3>
+                    </center>
+                    
+
+                    <div class="form-row d-flex justify-content-between">
+                        <div class="form-group col-5">
+                            <label for="sensor_label_color">Sensors:</label>
+                            {{ form.sensor_label_color }}                                           
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="camera_label_color">Cameras:</label>
+                            {{ form.camera_label_color }}
+                        </div>
+                    </div>
+
+                    <div class="form-row d-flex justify-content-between mt-3">
+                        <div class="form-group col-5">
+                            <label for="navigation_arrow_color">Nav Arrows:</label>
+                            {{ form.navigation_arrow_color }}
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="calibration_color">Calibrations:</label>
+                            {{ form.calibration_color }}
+                        </div>
+                    </div>
+
+                    <center>
+                        <h3 class="fw-bold pt-5" style="color: #000">Boundaries</h3>
+                    </center>
+
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <b>Error:</b> All border widths must be integers between 1 and 16.
+                    </div>
+                    {% endif %}
+
+                    <div class="form-row d-flex justify-content-between mt-3">
+                        <div class="form-group col-5">
+                            <label for="wall_color">Wall Color:</label>
+                            {{ form.wall_color }}                                           
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="wall_width">Wall Width:</label>
+                            {{ form.wall_width }}
+                        </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-between mt-3">
+                        <div class="form-group col-5">
+                            <label for="door_color">Door Color:</label>
+                            {{ form.door_color }}                                           
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="door_width">Door Width:</label>
+                            {{ form.door_width }}
+                        </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-between mt-3">
+                        <div class="form-group col-5">
+                            <label for="window_color">Window Color:</label>
+                            {{ form.window_color }}                                           
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="window_width">Window Width:</label>
+                            {{ form.window_width }}
+                        </div>
+                    </div>
+                    <div class="form-row d-flex justify-content-between mt-3">
+                        <div class="form-group col-5">
+                            <label for="furniture_color">Furniture Color:</label>
+                            {{ form.furniture_color }}                                           
+                        </div>
+                        <div class="form-group col-5">
+                            <label for="furniture_width">Furniture Width:</label>
+                            <div id="furniture_width_container">
+                                {{ form.furniture_width }}
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mt-2">Note: The widths defined here will not override the widths specified on the Measurement Page.</p>
+            </div>
+            <!-- Middle column containing PDF preview -->
+            <div class="col-3 m-4 justify-content-center" id="layout-preview">
+                {% if layout.style_settings.orientation == "portrait" %}
+                <div class="object-fit-contain pdf-preview" style="border: 1px solid rgb(166, 161, 161); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);"; style="width:auto">
+                    <center>
+                        <img src="{% url 'serve-image' layout.image %}" alt="Output Preview" style="max-height:450px; max-width:100%">
+                    </center>
+                </div>
+                <div class="mt-3 d-flex justify-content-center">
+                    <p class="view-in-browser" onclick="viewImageInBrowser('{{ layout.image }}')">View in browser</p>
+                </div>
+                <div class="mt-2 d-flex justify-content-center">
+                    <button id="refresh" name = "refresh" type="button" class="btn btn-primary">Refresh</button>
+                </div>
+                <div class="mt-2 d-flex justify-content-center">
+                    <button id="submit-all" type="button" class="btn btn-primary">Save and Apply Changes</button>
+                </div>
+                {% elif layout.style_settings.orientation == "landscape" %}
+                <div class="col-5 object-fit-contain pdf-preview" style="border: 1px solid rgb(166, 161, 161); box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); width:100%">
+                    <center>
+                        <img src="{% url 'serve-image' layout.image %}" alt="Output Preview" style="max-width:100%; height:auto">
+                    </center>
+                </div>
+                <div class="mt-3 d-flex justify-content-center">
+                    <p class="view-in-browser" onclick="viewImageInBrowser('{{ layout.image }}')">View in browser</p>
+                </div>
+                <div class="mt-2 d-flex justify-content-center">
+                    <button id="refresh" name = "refresh" type="button" class="btn btn-primary">Refresh</button>
+                </div>
+                <div class="mt-2 d-flex justify-content-center">
+                    <button id="submit-all" type="button" class="btn btn-primary">Save and Apply Changes</button>
+                </div>
+
+                {% endif %}
+                
+
+            </div>
+
+            <!-- Rightmost column containing controls for File Orientation and Label locations-->
+            <div class="col-4 justify-content-center p-3">
+
+                <center>
+                    <h3 class="fw-bold" style="color: #000">File Orientation</h3>
+                </center>
+                
+                <!-- Displaying the orientation field-->
+                <input type="hidden" id="id_orientation" name="orientation" value="{{ orientation_value }}">
+                <div class="mt-3 mb-3 p-3">
+                    <button type="button" style="font-size: 1.2vw;" class="btn btn-lg btn-light btn-orientation shadow-toggle {% if style_settings_instance.orientation == 'portrait' %}active{% endif %}" id="portraitButton">Portrait</button>
+                    <button type="button" style="font-size: 1.2vw;" class="btn btn-lg btn-light btn-orientation shadow-toggle {% if style_settings_instance.orientation == 'landscape' %}active{% endif %}" id="landscapeButton" style="margin-left:10px;">Landscape</button>
+                </div>
+
+                <center>
+                    <h3 class="fw-bold pt-3 mt-5" style="color: #000">Label Locations</h3>
+                </center>
+
+                <div class="mt-3" style="overflow-y: auto; max-height: 400px;">
+                    {% for label, label_form in label_data %}
+                    <div class="mb-1">
+                        <div class="d-flex form-row align-content-center align-items-center">
+                            <div class="col-lg-6 col-md-3 pt-3">
+                                <p>{{ label.name }}</p>
+                            </div>
+                            {{ label_form.management_form }}
+                            <div class="form-group col-lg-5 col-md-8">
+                                {{ label_form.location }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+        </form>
+    </div>
+
+
+    <script>
+        function viewImageInBrowser(imagePath) {
+            // Construct the URL for the view-in-browser endpoint
+            var url = "{% url 'serve-image' layout.image %}";
+            
+            // Open the URL in a new browser window
+            window.open(url, "_blank");
+        }
+    
+        // JavaScript for the Refresh and Save and Apply Changes buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Refresh Button functionality
+            document.getElementById('refresh').addEventListener('click', function() {
+                // Create loading overlay similar to the import page
+                const loadingOverlay = Object.assign(document.createElement('div'), {
+                    id: 'loading-overlay',
+                    style: 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); display: flex; justify-content: center; align-items: center; z-index: 9999;'
+                });
+                
+                // Create spinner element
+                const spinner = Object.assign(document.createElement('div'), {
+                    className: 'spinner-border',
+                    style: 'display: inline-block; width: 3rem; height: 3rem; vertical-align: text-bottom; border: 0.25em solid #1a9cdd; border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite;'
+                });
+                
+                // Add spinner to loading overlay
+                loadingOverlay.appendChild(spinner);
+                document.body.appendChild(loadingOverlay);
+
+                // Add a hidden input for refresh
+                const refreshInput = document.createElement('input');
+                refreshInput.type = 'hidden';
+                refreshInput.name = 'refresh';
+                refreshInput.value = 'true';
+                
+                // Get the form
+                const form = document.getElementById('layout-form');
+                form.appendChild(refreshInput);
+                
+                // Submit the form
+                form.submit();
+            });
+
+            // Save and Apply Changes button functionality
+            document.getElementById('submit-all').addEventListener('click', function() {
+                // Create loading overlay
+                const loadingOverlay = Object.assign(document.createElement('div'), {
+                    id: 'loading-overlay',
+                    style: 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); display: flex; justify-content: center; align-items: center; z-index: 9999;'
+                });
+                
+                // Create spinner element
+                const spinner = Object.assign(document.createElement('div'), {
+                    className: 'spinner-border',
+                    style: 'display: inline-block; width: 3rem; height: 3rem; vertical-align: text-bottom; border: 0.25em solid #1a9cdd; border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite;'
+                });
+                
+                // Add spinner to loading overlay
+                loadingOverlay.appendChild(spinner);
+                document.body.appendChild(loadingOverlay);
+
+                // Get all label forms and submit them
+                var labelForms = document.querySelectorAll('form[id^="label-form-"]');
+                labelForms.forEach(function(form) {
+                    form.submit();
+                });
+                
+                // Submit the main layout form
+                document.getElementById('layout-form').submit();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all thickness input fields (wall_width, door_width, window_width, furniture_width)
+            const thicknessInputs = [
+            document.getElementById('id_wall_width'),
+            document.getElementById('id_door_width'), 
+            document.getElementById('id_window_width')
+            ];
+            
+            // Add validation to each thickness input
+            thicknessInputs.forEach(input => {
+            if (input) {
+                // Set input attributes
+                input.setAttribute('min', '1');
+                input.setAttribute('max', '16');
+                input.setAttribute('type', 'number');
+                
+                // Create error message container
+                const errorContainer = document.createElement('div');
+                errorContainer.className = 'alert alert-warning mt-1 thickness-error';
+                errorContainer.style.display = 'none';
+                errorContainer.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Value must be between 1 and 16.';
+                input.parentNode.appendChild(errorContainer);
+                
+                // Add input validation
+                input.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                
+                if (isNaN(value) || value < 1 || value > 16) {
+                    errorContainer.style.display = 'block';
+                    this.classList.add('is-invalid');
+                } else {
+                    errorContainer.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                }
+                });
+                
+                // Add blur validation (when leaving the field)
+                input.addEventListener('blur', function() {
+                const value = parseInt(this.value);
+                
+                if (isNaN(value) || value < 1) {
+                    this.value = 1;
+                    errorContainer.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                } else if (value > 16) {
+                    this.value = 16;
+                    errorContainer.style.display = 'none';
+                    this.classList.remove('is-invalid');
+                }
+                });
+            }
+            });
+
+            // Add validation for furniture width (if it exists)
+            const furnitureWidthInput = document.getElementById('id_furniture_width');
+            if (furnitureWidthInput) {
+            furnitureWidthInput.setAttribute('min', '0.5');
+            furnitureWidthInput.setAttribute('max', '16');
+            furnitureWidthInput.setAttribute('type', 'number');
+            
+            // Set default value to 0.5
+            if (furnitureWidthInput.value == 0.0) {
+                furnitureWidthInput.value = 0.5;
+            }
+            
+            // Create error message container for furniture width
+            const errorContainer = document.createElement('div');
+            errorContainer.className = 'alert alert-warning mt-1 thickness-error';
+            errorContainer.style.display = 'none';
+            errorContainer.innerHTML = '<i class="bi bi-exclamation-triangle-fill"></i> Value must be between 0.5 and 16.';
+            furnitureWidthInput.parentNode.appendChild(errorContainer);
+            
+            // Add input validation for furniture width
+            furnitureWidthInput.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                
+                if (isNaN(value) || value < 0.5 || value > 16) {
+                errorContainer.style.display = 'block';
+                this.classList.add('is-invalid');
+                } else {
+                errorContainer.style.display = 'none';
+                this.classList.remove('is-invalid');
+                }
+            });
+            
+            // Add blur validation for furniture width
+            furnitureWidthInput.addEventListener('blur', function() {
+                const value = parseFloat(this.value);
+                
+                if (isNaN(value) || value < 0.5) {
+                this.value = 0.5;
+                errorContainer.style.display = 'none';
+                this.classList.remove('is-invalid');
+                } else if (value > 16) {
+                this.value = 16;
+                errorContainer.style.display = 'none';
+                this.classList.remove('is-invalid');
+                }
+            });
+            }
+            
+            // Add validation before form submission
+            const form = document.getElementById('layout-form');
+            if (form) {
+            form.addEventListener('submit', function(event) {
+                let isValid = true;
+                
+                thicknessInputs.forEach(input => {
+                if (input) {
+                    const value = parseInt(input.value);
+                    if (isNaN(value) || value < 1 || value > 16) {
+                    isValid = false;
+                    input.classList.add('is-invalid');
+                    input.parentNode.querySelector('.thickness-error').style.display = 'block';
+                    }
+                }
+                });
+
+                if (furnitureWidthInput) {
+                const value = parseFloat(furnitureWidthInput.value);
+                if (isNaN(value) || value < 0.5 || value > 16) {
+                    isValid = false;
+                    furnitureWidthInput.classList.add('is-invalid');
+                    furnitureWidthInput.parentNode.querySelector('.thickness-error').style.display = 'block';
+                }
+                }
+                
+                if (!isValid) {
+                event.preventDefault();
+                }
+            });
+            
+            // Add validation for the Save and Apply button
+            const submitButton = document.getElementById('submit-all');
+            if (submitButton) {
+                submitButton.addEventListener('click', function() {
+                let allValid = true;
+                
+                thicknessInputs.forEach(input => {
+                if (input) {
+                    const value = parseInt(input.value);
+                    if (isNaN(value) || value < 1 || value > 16) {
+                    allValid = false;
+                    }
+                }
+                });
+                
+                if (allValid) {
+                    form.submit();
+                } else {
+                    alert('Please correct the thickness values. All values must be between 1 and 16.');
+                }
+                });
+            }
+            }
+        });
+
+    </script>    
+{% endblock %}

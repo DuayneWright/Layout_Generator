@@ -1,0 +1,15 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Cum sunt expedita r,,,,,,,,,,,,
+Building,Veritatis optio des,,,,,,,,,,,,
+Room Name,Chava Bray,,,,,,,,,,,,
+Date,2020 February 28,,,,,,,,,,,,
+Layout Name,Denise Burt,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-70.88,37.38,24.0
+Y Axis,,,,,,,,,,,-14.63,68.38,24.0
+Wall, ,-70.88,68.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-1.38,68.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-17.88,53.13,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,37.38,21.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Room Navigation, ,-33.38,9.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Room Navigation, ,-9.38,-14.63,0.0,0.0,0.0,1.0,0.0,,,,,

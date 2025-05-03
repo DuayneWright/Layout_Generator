@@ -1,0 +1,16 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,In sed et qui at sin,,,,,,,,,,,,
+Building,Fugiat quia cupidit,,,,,,,,,,,,
+Room Name,Roary Mcgee,,,,,,,,,,,,
+Date,2002 December 18,,,,,,,,,,,,
+Layout Name,Stacy Carver,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-76.55,0.0,24.0
+Y Axis,,,,,,,,,,,-44.18,34.32,24.0
+blackCircle, ,-20.05,34.32,30.0,30.0,15.0,1.0,0.0,,,,,
+square, ,-39.55,-2.18,30.0,30.0,0.0,1.0,0.0,,,,,
+blackDiamond, ,-51.3,18.82,30.0,30.0,0.0,1.0,0.0,,,,,
+camera, ,-76.55,-6.93,30.0,30.0,0.0,1.0,0.0,,,,,
+whiteCircle, ,-27.05,-21.43,30.0,30.0,15.0,1.0,0.0,,,,,
+dottedCircle, ,-52.05,-44.18,30.0,30.0,15.0,1.0,0.0,,,,,
+dottedSquare, ,-20.8,-2.43,30.0,30.0,0.0,1.0,0.0,,,,,

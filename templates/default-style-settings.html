@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+
+{% block title %}Style Settings{% endblock %}
+
+{% block styling %}
+<style>
+    body {
+        background: #f5f7fa;
+    }
+
+    .settings-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+    }
+
+    .settings-sidebar {
+        background: #1a1c1e;
+        min-height: calc(100vh - 4rem);
+        padding-top: 2rem;
+    }
+
+    .settings-content {
+        padding: 2.5rem 3rem;
+    }
+
+    .list-group-item {
+        padding: 0;
+        background: transparent;
+        border: none;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        margin: 0.25rem 1rem;
+    }
+
+    .list-group-item a {
+        color: #e2e8f0;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .list-group-item.active a {
+        color: #e2e8f0;
+    }
+
+    .list-group-item:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .list-group-item.active {
+        background: #1a9cdd;
+    }
+
+    .settings-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .settings-title {
+        font-size: 1.875rem;
+        font-weight: 600;
+        color: #1a1c1e;
+        margin: 0;
+    }
+
+    .reset-btn {
+        background: #e2e8f0;
+        color: #1a1c1e;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+        background: #cbd5e1;
+    }
+
+    .settings-section {
+        background: #f8fafc;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+    }
+
+    .settings-section-title {
+        color: #1a9cdd;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+    }
+
+    .settings-subsection {
+        margin-bottom: 1.5rem;
+    }
+
+    .settings-subsection-title {
+        color: #475569;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #64748b;
+        font-weight: 500;
+    }
+
+    .form-control {
+        width: 100%;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: white;
+    }
+
+    .save-btn {
+        background: #1a9cdd;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .save-btn:hover {
+        background: #1f6a96;
+    }
+
+    .alert {
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#reset-settings').click(function () {
+            if (confirm('Are you sure you want to reset to default settings?')) {
+                window.location.href = '{% url "reset-settings" %}';
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <div class="row g-0">
+        <div class="col-3 settings-sidebar">
+            <ul class="list-group">
+                <li class="list-group-item active">
+                    <a href="{% url 'settings' %}">Default Style Settings</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{% url 'account-settings' %}">Account Settings</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col settings-content">
+            <div class="settings-header">
+                <h1 class="settings-title">Default Style Settings</h1>
+                <button type="button" class="reset-btn" id="reset-settings">
+                    Reset to system defaults
+                </button>
+            </div>
+
+            {% if messages %}
+            <div class="alert alert-success" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="settings-section">
+                    <h2 class="settings-section-title">Object Colors</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sensor_label_color">Sensors</label>
+                            {{ form.sensor_label_color }}
+                        </div>
+                        <div class="form-group">
+                            <label for="camera_label_color">Cameras</label>
+                            {{ form.camera_label_color }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="navigation_arrow_color">Navigation Arrows</label>
+                            {{ form.navigation_arrow_color }}
+                        </div>
+                        <div class="form-group">
+                            <label for="calibration_color">Calibrations</label>
+                            {{ form.calibration_color }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h2 class="settings-section-title">Boundary Settings</h2>
+
+                    <div class="settings-subsection">
+                        <h3 class="settings-subsection-title">Walls</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="wall_color">Color</label>
+                                {{ form.wall_color }}
+                            </div>
+                            <div class="form-group">
+                                <label for="wall_width">Thickness</label>
+                                {{ form.wall_width }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-subsection">
+                        <h3 class="settings-subsection-title">Doors</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="door_color">Color</label>
+                                {{ form.door_color }}
+                            </div>
+                            <div class="form-group">
+                                <label for="door_width">Thickness</label>
+                                {{ form.door_width }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-subsection">
+                        <h3 class="settings-subsection-title">Windows</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="window_color">Color</label>
+                                {{ form.window_color }}
+                            </div>
+                            <div class="form-group">
+                                <label for="window_width">Thickness</label>
+                                {{ form.window_width }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-subsection">
+                        <h3 class="settings-subsection-title">Furniture</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="furniture_color">Color</label>
+                                {{ form.furniture_color }}
+                            </div>
+                            <div class="form-group">
+                                <label for="furniture_width">Thickness</label>
+                                {{ form.furniture_width }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="save-btn">
+                    Save and Apply Changes
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

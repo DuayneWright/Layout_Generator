@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Consequuntur dolorib,,,,,,,,,,,,
+Building,Nihil tempora aperia,,,,,,,,,,,,
+Room Name,Chancellor Waters,,,,,,,,,,,,
+Date,1981 August 28,,,,,,,,,,,,
+Layout Name,Harding Fisher,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,0.0,36.0
+Y Axis,,,,,,,,,,,0.0,12.25,36.0
+Room Navigation, ,0.00,12.25,0.0,12.0,0.0,1.0,-90.0,,right,,,

@@ -1,0 +1,16 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Est in quibusdam co,,,,,,,,,,,,
+Building,Aut in ad aut vel ve,,,,,,,,,,,,
+Room Name,Michelle Cherry,,,,,,,,,,,,
+Date,1971 May 09,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-49.25,10.75,24.0
+Y Axis,,,,,,,,,,,-63.0,47.57,24.0
+Wall,dline1,-33.79,10.07,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,dline1,-9.00,10.25,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,dline2,-14.04,-26.43,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,dline2,10.75,-26.25,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,line1,-49.25,-20.75,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall,line1,-7.00,-63.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Sensor,obj2,-22.54,47.57,7.5,7.5,0.0,1.0,0.0,,,,,
+Calibration,obj1,6.71,37.32,7.5,7.5,0.0,1.0,0.0,,,,,

@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Recusandae Eveniet,,,,,,,,,,,,
+Building,Accusantium similiqu,,,,,,,,,,,,
+Room Name,Portia Powers,,,,,,,,,,,,
+Date,1997 October 14,,,,,,,,,,,,
+Layout Name,Cailin Wilder,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,0.0,24.0
+Y Axis,,,,,,,,,,,0.0,12.25,24.0
+Room Navigation, ,0.00,12.25,0.0,12.0,0.0,1.0,-90.0,,up,,,

@@ -1,0 +1,17 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Minim aut exercitati,,,,,,,,,,,,
+Building,Voluptate praesentiu,,,,,,,,,,,,
+Room Name,Avram Beck,,,,,,,,,,,,
+Date,2023 April 14,,,,,,,,,,,,
+Layout Name,Nolan Paul,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-25.38,29.15,36.0
+Y Axis,,,,,,,,,,,-23.63,51.38,36.0
+Wall, ,-23.63,51.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,29.13,51.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,29.15,51.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,29.13,-23.63,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,29.15,-23.63,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-25.38,-23.63,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-25.13,-23.63,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-23.63,51.38,0.0,0.0,0.0,1.0,0.0,,,,,

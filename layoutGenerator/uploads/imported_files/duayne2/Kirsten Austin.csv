@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Tenetur laudantium ,,,,,,,,,,,,
+Building,Enim dolores nesciun,,,,,,,,,,,,
+Room Name,Lucy Kidd,,,,,,,,,,,,
+Date,2016 June 08,,,,,,,,,,,,
+Layout Name,Kirsten Austin,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,11.5,36.0
+Y Axis,,,,,,,,,,,-2.75,0.25,36.0
+Room Navigation, ,11.50,-2.75,0.0,12.0,0.0,1.0,15.0,,right,,,

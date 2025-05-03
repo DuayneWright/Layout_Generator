@@ -1,0 +1,11 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Aut et voluptatem S,,,,,,,,,,,,
+Building,Ex placeat dignissi,,,,,,,,,,,,
+Room Name,Alexa Phillips,,,,,,,,,,,,
+Date,1995 May 28,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-12.0,12.0,24.0
+Y Axis,,,,,,,,,,,-12.0,12.0,24.0
+Camera, ,12.0,12.0,0.0,0.0,0.0,1.0,0.0,,,,,
+Calibration, ,-12.0,12.0,0.0,0.0,0.0,1.0,0.0,,,,,
+Sensor, ,12.0,-12.0,0.0,0.0,0.0,1.0,0.0,,,,,

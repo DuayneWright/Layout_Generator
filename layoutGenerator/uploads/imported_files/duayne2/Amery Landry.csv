@@ -1,0 +1,14 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Commodi ut aspernatu,,,,,,,,,,,,
+Building,Sunt vitae veniam e,,,,,,,,,,,,
+Room Name,Faith Long,,,,,,,,,,,,
+Date,2008 January 20,,,,,,,,,,,,
+Layout Name,Amery Landry,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-70.88,37.38,36.0
+Y Axis,,,,,,,,,,,-25.63,68.38,36.0
+Wall, ,-70.88,68.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-1.38,68.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-17.88,53.13,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,37.38,21.38,0.0,0.0,0.0,1.0,0.0,,,,,
+Room Navigation, ,0.13,-0.38,0.0,36.0,0.0,1.0,45.0,,,,,

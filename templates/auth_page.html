@@ -1,0 +1,466 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/1d8cdea5ad.js" crossorigin="anonymous"></script>
+    <title>Authentication</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/asset_abbr_logo_tm.png' %}" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f6f5f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            width: 100vw;
+            margin: -20px 0 50px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        p {
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 20px;
+            letter-spacing: 0.5px;
+            margin: 40px 0 40px;
+        }
+
+        span {
+            font-size: 12px;
+        }
+
+        a {
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0px;
+        }
+
+        button {
+            border-radius: 20px;
+            border: 1px solid #1f6a96;
+            background-color: #1f6a96;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 12px 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in;
+            font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        button.ghost {
+            background-color: transparent;
+            border-color: #ffffff;
+        }
+
+        form {
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 50px;
+            height: 100%;
+            text-align: center;
+        }
+
+        input {
+            background-color: #eee;
+            border: none;
+            border-radius: 20px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            outline: none;
+            color: #000000;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .sign-in-container {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .container.right-panel-active .sign-in-container {
+            transform: translateX(100%);
+        }
+
+        .sign-up-container {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .container.right-panel-active .sign-up-container {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: show 0.6s;
+        }
+
+        @keyframes show {
+
+            0%,
+            49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .overlay-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.6s ease-in-out;
+            z-index: 100;
+        }
+
+        .container.right-panel-active .overlay-container {
+            transform: translateX(-100%);
+        }
+
+        .overlay {
+            background: #1f6a96;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 0 0;
+            color: #ffffff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .container.right-panel-active .overlay {
+            transform: translateX(50%);
+        }
+
+        .overlay-panel {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            text-align: center;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            transform: translateX(0);
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .overlay-left {
+            transform: translateX(-20%);
+        }
+
+        .overlay-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .container.container.right-panel-active .overlay-left {
+            transform: translateX(0);
+        }
+
+        .container.container.right-panel-active .overlay-right {
+            transform: translateX(20%);
+        }
+
+        .alert {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 15px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.5;
+        }
+
+        .alert p {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 10px;
+            margin-top: 15px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.5;
+        }
+
+        .success p {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .sign-up-container .sign-up-btn {
+            margin-top: 10px;
+        }
+
+        /* For tablets and smaller screens */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+            }
+
+            form {
+                padding: 0 30px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            p {
+                font-size: 13px;
+                margin: 20px 0 30px;
+            }
+        }
+
+        /* For mobile devices */
+        @media screen and (max-width: 480px) {
+            body {
+                padding: 20px;
+                margin: 0;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .container {
+                width: 100%;
+                min-height: auto;
+            }
+
+            .form-container {
+                width: 100%;
+            }
+
+            .sign-in-container, 
+            .sign-up-container {
+                width: 100%;
+            }
+
+            .overlay-container {
+                display: none;
+            }
+
+            form {
+                padding: 0 20px;
+            }
+
+            input {
+                padding: 10px 12px;
+                margin: 6px 0;
+            }
+
+            button {
+                padding: 10px 20px;
+            }
+
+            .alert, 
+            .success {
+                margin-top: 10px;
+                padding: 8px;
+            }
+        }
+
+        /* Preserve sliding animation for larger screens */
+        @media screen and (min-width: 481px) {
+            .overlay-container {
+                display: block;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form id="signupForm" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="signup" value="signup">
+                <h1>Create Account</h1>
+                <input type="text" placeholder="Username" name="username" required>
+                <input type="email" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Password" name="password1" required>
+                <input type="password" placeholder="Confirm Password" name="password2" required>
+                <button type="submit" class="sign-up-btn">Sign Up</button>
+                <div id="messageArea"></div>
+            </form>
+        </div>
+
+        <div class="form-container sign-in-container">
+            <form method="post">
+                {% csrf_token %}
+                <input type="hidden" name="signin" value="signin">
+                <h1>Sign In</h1>
+                <input id="username" type="text" placeholder="Username" name="username" required>
+                <input id="password" type="password" placeholder="Password" name="pass" required>
+                <a href="{% url 'reset_password' %}" class="forgot-password">Forgot Password</a>
+                <button id='signinbutton' type="submit">Sign In</button>
+                <div id="signInMessageArea">
+                    {% for message in messages %}
+                    {% if message.tags == "warning" %}
+                    <div class="alert">
+                        <p>{{ message }}</p>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Already have an account?</h1>
+                    <p>Sign in to continue with us!</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Don’t have an account?</h1>
+                    <p>Enter your details to start your journey!</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+        const signupForm = document.getElementById('signupForm');
+        const messageArea = document.getElementById('messageArea');
+
+        signUpButton.addEventListener('click', () => {
+            container.classList.add('right-panel-active');
+        });
+
+        signInButton.addEventListener('click', () => {
+            container.classList.remove('right-panel-active');
+        });
+
+        signupForm.addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const formData = new FormData(signupForm); // Create a FormData object
+
+            fetch('{% url "auth-page" %}', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest', // Indicate that this is an AJAX request
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Clear any previous messages
+                    messageArea.innerHTML = '';
+                    document.getElementById("signInMessageArea").innerHTML = ''; // Clear sign-in message area
+
+                    if (data.success) {
+                        signupForm.reset(); // Clear form fields
+                        
+                        // Show success message in the sign-in area
+                        document.getElementById("signInMessageArea").innerHTML += `<div class="success"><p>${data.message}</p></div>`;
+
+                        // Switch to the Sign In form view
+                        container.classList.remove('right-panel-active');
+                    } else {
+                        // Show error message under the Sign Up form
+                        messageArea.innerHTML += `<div class="alert"><p>${data.message}</p></div>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    messageArea.innerHTML += `<div class="alert"><p>There was an error processing your request.</p></div>`;
+                });
+
+        });
+
+    </script>
+</body>
+
+</html>

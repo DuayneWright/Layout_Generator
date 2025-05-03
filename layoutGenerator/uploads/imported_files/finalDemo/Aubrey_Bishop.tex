@@ -1,0 +1,169 @@
+
+    %!TeX program = lualatex
+    \documentclass[12pt]{article}
+
+    \usepackage[hmargin=0.5in, tmargin=0.75in, bmargin=0.9in]{geometry}
+    \geometry{legalpaper, portrait}
+   
+    \usepackage{graphicx}  % graphic controls
+    \usepackage{float}  % positioning controls
+    \usepackage{lastpage}  % last page number finder
+    \usepackage{makecell}  % helpers for multilined table cells
+
+    % header/footer
+    \usepackage{fancyhdr}
+    \pagestyle{fancy}
+
+    \lhead{1970 October 05}
+    \chead{}
+    \rhead{\footnotesize \thepage \ {\color{gray} of \pageref{LastPage}}}
+
+    \cfoot{}
+    \rfoot{\textbf{\LARGE Cyrus Fitzpatrick}\\\vspace{3pt}{\large\color{gray}NIH STTR Phase II}}
+
+    \renewcommand{\headrulewidth}{0.25pt}
+    \renewcommand{\footrulewidth}{0.25pt}
+
+    % drawing things
+    \usepackage{tikz}
+    \usetikzlibrary{math, calc, shapes, arrows.meta}
+
+    \tikzstyle{grid-line} = [gray, very thin]
+    \tikzstyle{wall} = [line width=2pt, line cap=round]
+    \tikzstyle{window} = [line width=1pt, line cap=round]
+    \tikzstyle{door} = [line width=1pt]
+    \tikzstyle{furniture} = [draw, line width=0.5pt, transform shape]
+    \tikzstyle{furniture-label} = [fill=white, align=center]
+    \tikzstyle{sensor} = [circle, draw, color=teal, fill=teal, inner sep=0.5mm]
+    \tikzstyle{sensor-label} = [above, yshift=2pt, fill=white, align=center, text=teal]
+    \tikzstyle{location} = [diamond, draw, color=violet, fill=violet, inner sep=0.5mm]
+    \tikzstyle{location-label} = [above, yshift=3pt, fill=white, text=violet]
+    \tikzstyle{walking-path} = [densely dashed, line width=0.25mm, -{Stealth[length=4mm, width=2mm]}]
+    \tikzstyle{nav-arrow} = [line width=0.25mm, {Stealth[length=4mm, width=2mm]}-, green!60!black]
+    
+    
+    \def\furnitureR[height=#1, width=#2, rotate=#3](#4, #5){%
+	% Draws a rectangular furniture piece centered on provided coordinates in a Tikz picture
+	% \furnitureR[height=<value>, width=<value>, rotate=<degrees>](<x>, <y>)
+	\draw[line width=0.5pt, color=black, rotate around={#3:(#4,#5)}] (#4-#2/2, #5-#1/2) rectangle (#4+#2/2, #5+#1/2)  
+    }
+
+    \def\furnitureC[radius=#1](#2, #3){%
+	    % Draws a circular furniture piece centered on provided coordinates in a Tikz picture
+	    % \furnitureC[radius=<value>](<x>, <y>)
+	    \draw[line width=0.5pt, color=black] (#2, #3) circle (#1)
+    }
+
+    
+
+    \def\camera[#1](#2,#3){
+	    \node[circle, draw, color=blue!75!black, fill=blue!75!black, inner sep=0in, minimum size=0.1in, anchor=center, #1] at (#2,#3) {};
+	    \node[isosceles triangle, draw, color=blue!75!black, fill=blue!75!black, inner sep=0in, minimum size=0.1in, isosceles triangle apex angle=75, anchor=east, #1] at (#2,#3) {}
+     }
+
+    \tikzstyle{camera-label} = [fill=white, align=center, text=blue!75!black, above, yshift=8pt]
+
+    % units
+    \usepackage{siunitx}
+    \sisetup{per-mode = symbol}
+
+    \let\DeclareUSUnit\DeclareSIUnit
+    \let\US\SI
+    \let\us\si
+    \DeclareUSUnit\inch{in}
+    \DeclareUSUnit\feet{ft}
+    \DeclareUSUnit\foot{ft}
+    \DeclareUSUnit\pound{lb}
+    \DeclareUSUnit\slug{slug}
+
+    % paragraph settings
+    \setlength{\parindent}{0em}
+    \raggedright
+
+    \begin{document}
+    \vspace*{\stretch1}  % Push figure down
+    \begin{figure}[H]
+        \centering
+
+        \begin{tikzpicture}[scale=1/9.3,  % use this to reduce or enlargen the image on paper
+                               x=1cm,
+                               y=1cm,
+                               rotate=0]  % use this to rotate orientation by degrees on paper
+
+    
+        %% GRID - X
+        \foreach \i in {-72.0,-36.0,...,72.0}{
+            \draw[grid-line] (\i,-77.0) -- (\i,77.0);
+            \tikzmath{int \value; \value = \i;}; 
+            \node[gray, below] at (\i,-77.0) {\SI{\value}{\inch}};
+        }
+
+        %% GRID - Y
+        \foreach \i in {-72.0,-36.0,...,72.0}{
+            \draw[grid-line] (-77.0,\i) -- (77.0,\i);
+            \tikzmath{int \value; \value = \i;};
+            \node[gray, left] at (-77.0,\i) {\SI{\value}{\inch}};
+        }
+    
+
+    % Exterior walls
+    
+
+    % Furniture
+    \furnitureR[height=7.886313911381412, width=39.43156955690706, rotate=0.0](-42.54, -10.96);
+\furnitureR[height=26.26519524512761, width=26.26519524512761, rotate=0.0](12.19, -30.35);
+\furnitureR[height=34.1482745964468, width=20.48896475786808, rotate=0.0](-36.29, -26.95);
+\furnitureC[radius=7.30331242541699](-33.79, 26.46);
+\furnitureR[height=5.70970976247616, width=38.74038073840074, rotate=0.0](-7.79, 53.1);
+\furnitureR[height=7.5, width=7.5, rotate=0.0](44.96, -8.4);
+\furnitureC[radius=5.312260335117254](-55.79, 5.5);
+
+
+    % Cameras
+    
+
+    % Sensors
+    \node[sensor, color=teal, scale=1.0, inner sep=7.5mm](sensor) at (-51.29,39.51) {};
+\node[sensor, color=teal, scale=1.0, inner sep=12.5mm](sensor) at (22.96,26.65) {};
+
+    
+    % Calibrations
+    
+
+    % Room Navigation
+    
+    
+    
+    \end{tikzpicture}
+    \end{figure}
+    \vspace*{\stretch1}  % Push figure up
+    
+    \vspace*{\fill}  % fills the area between the table and layout with whitespace, forcing the table to the bottom of the page.
+    \begin{table}[H]
+	\begin{tabular}{l l}
+		\makecell[lt]{
+			\textbf{Location:}\\
+     		Consequatur iusto ut Neighborhood \\
+ 		    Voluptatem accusanti Bldg, Still Hopes\\
+           	1 Still Hopes Drive\\
+           	West Columbia, SC 29033\\\\
+        }   	
+        &	
+		\makecell[tp{5in}]{
+		\textbf{Notes:}\\
+		\vspace{-8mm}  % reduce whitespace created by itemize above list
+		\begin{itemize}
+			\setlength\itemsep{-3mm}  % reduce whitespace created by itemize between lines
+			\item Measurements are to the nearest \SI{0.25}{\inch}
+			\item The furniture locations are approximate.
+			\item Laptop and data acquisition system is located beside the table.
+			\item Cameras are located on the ceiling.
+		\end{itemize}
+		}	
+			
+	\end{tabular}
+	\vspace{-8mm} % reduce whitespace after table
+\end{table}
+
+    \end{document}
+    

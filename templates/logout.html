@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout</title>
+  <!-- Favicon -->
+  <link rel="icon" href="{% static 'images/asset_abbr_logo_tm.png' %}" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f6f5f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .logout-container {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 50px;
+      width: 350px;
+      text-align: center;
+    }
+
+    h3 {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 14px;
+      color: #555;
+      margin: 0 0 20px 0;
+      width: 100%;
+    }
+
+    .company-logo {
+      margin-bottom: 0px;
+    }
+
+    .company-logo img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: #1a9cdd;
+      text-decoration: none;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="logout-container">
+    <h3>Logged Out Successfully</h3>
+    <div class="company-logo">
+      <img src="{% static 'images/asset_primary_logo_tm.png' %}" alt="Company Logo">
+    </div>
+    <p>Thank you for visiting! To log in again, click below.</p>
+    <a href="{% url 'auth-page' %}">Back to Login</a>
+  </div>
+</body>
+
+</html>

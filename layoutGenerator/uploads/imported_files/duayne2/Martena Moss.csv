@@ -1,0 +1,10 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Elit odio quia dolo,,,,,,,,,,,,
+Building,Qui adipisicing fuga,,,,,,,,,,,,
+Room Name,Angela Cunningham,,,,,,,,,,,,
+Date,1972 December 24,,,,,,,,,,,,
+Layout Name,Martena Moss,,,,,,,,,,,,
+X Axis,,,,,,,,,,,0.0,8.25,36.0
+Y Axis,,,,,,,,,,,0.0,8.75,36.0
+Room Navigation, ,8.25,8.75,0.0,12.0,0.0,1.0,-45.0,,,,,

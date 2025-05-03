@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block title %}Account Settings{% endblock %}
+
+{% block styling %}
+<style>
+    body {
+        background: #f5f7fa;
+    }
+
+    .settings-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+    }
+
+    .settings-sidebar {
+        background: #1a1c1e;
+        min-height: calc(100vh - 4rem);
+        padding-top: 2rem;
+    }
+
+    .settings-content {
+        padding: 2.5rem 3rem;
+    }
+
+    .list-group-item {
+        padding: 0;
+        background: transparent;
+        border: none;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        margin: 0.25rem 1rem;
+    }
+
+    .list-group-item a {
+        color: #e2e8f0;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        padding: 1rem 1.5rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .list-group-item.active a {
+        color: #e2e8f0;
+    }
+
+    .list-group-item:hover:not(.active) {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .list-group-item.active {
+        background: #1a9cdd;
+    }
+
+    .settings-title {
+        font-size: 1.875rem;
+        font-weight: 600;
+        color: #1a1c1e;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-section {
+        max-width: 600px;
+        margin-top: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #475569;
+        font-weight: 600;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        background: white;
+        transition: all 0.2s;
+    }
+
+    .form-control:focus {
+        border-color: #1a9cdd;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    .form-control[readonly] {
+        background-color: #f8f9fa;
+        cursor: not-allowed;
+    }
+
+    .save-btn {
+        background: #1a9cdd;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-weight: 500;
+        transition: all 0.2s;
+    }
+
+    .save-btn:hover {
+        background: #1f6a96;
+    }
+
+    .alert {
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+    }
+
+    .alert-success {
+        background: #dcfce7;
+        color: #166534;
+        border: 1px solid #86efac;
+    }
+
+    .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fca5a5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="settings-container">
+    <div class="row g-0">
+        <div class="col-3 settings-sidebar">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <a href="{% url 'settings' %}">Default Style Settings</a>
+                </li>
+                <li class="list-group-item active">
+                    <a href="{% url 'account-settings' %}">Account Settings</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col settings-content">
+            <h1 class="settings-title">Account Settings</h1>
+
+            {% if messages %}
+            <div class="alert alert-success">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="post" class="form-section">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ form.email.value }}" class="form-control"
+                        readonly>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="new_password1">New Password</label>
+                    {{ form.new_password1 }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="new_password2">Confirm New Password</label>
+                    {{ form.new_password2 }}
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="old_password">Current Password</label>
+                    {{ form.old_password }}
+                </div>
+
+                {% if form.errors %}
+                {% for field in form %}
+                {% for error in field.errors %}
+                <div class="alert alert-danger">
+                    {{ error }}
+                </div>
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+
+                <button type="submit" class="save-btn">
+                    Save Changes
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

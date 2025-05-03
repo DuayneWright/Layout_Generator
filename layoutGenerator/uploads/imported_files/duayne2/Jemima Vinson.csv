@@ -1,0 +1,13 @@
+Type,Descriptor,X,Y,width,length,radius,scale,rotation,furniture_type,room_navigation_direction,min,max,step
+Orientation,,,,,,,,,,,,,
+Neighborhood,Ipsum nisi exercita,,,,,,,,,,,,
+Building,Anim voluptas est p,,,,,,,,,,,,
+Room Name,Rashad Goff,,,,,,,,,,,,
+Date,2022 June 09,,,,,,,,,,,,
+Layout Name,Jemima Vinson,,,,,,,,,,,,
+X Axis,,,,,,,,,,,-42.0,57.25,36.0
+Y Axis,,,,,,,,,,,-29.25,39.0,36.0
+Wall, ,-42.00,39.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,43.25,39.00,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,-38.75,9.75,0.0,0.0,0.0,1.0,0.0,,,,,
+Wall, ,57.25,9.75,0.0,0.0,0.0,1.0,0.0,,,,,
